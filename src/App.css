@@ -1,5 +1,89 @@
-.App {
+.app {
+  font-family: 'Libre Franklin', sans-serif;
   text-align: center;
+  box-sizing: border-box;
 }
 
+.nav-bar {
+  width: 100%;
+  background-color: rgb(106, 126, 151);
+}
 
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: whitesmoke;
+}
+
+.nav-container img {
+  height: 75px;
+  max-width: auto;
+  border-radius: 3px;
+  margin: 10px;
+  margin-left: 10%
+}
+
+.nav-container h3 {
+  margin-right: 10%;
+}
+
+.home {
+  margin-top: 5%;
+}
+
+.home h1 {
+  font-size: 50px;
+}
+
+hr {
+  width: 50%;
+}
+
+.search {
+  margin-top: 50px;
+}
+
+.search h3 {
+ text-align: left;
+ margin-left: 20%;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 20%;
+  padding-right: 20%;
+  margin-top: 20px;
+}
+
+.reco #toggle-lbl {
+  margin-top: 0;
+}
+
+#art-btn {
+  background-color: rgb(106, 126, 151);
+  color: whitesmoke;
+  margin-top: 50px;
+}
+
+/* semantic-ui adjustments --> change toggle color to green  */
+.ui.fitted.toggle.checkbox input:focus:checked~label:before,
+.ui.fitted.toggle.checkbox input:focus:checked~label:before,
+.ui.fitted.toggle.checkbox input:checked ~.box:before,
+.ui.fitted.toggle.checkbox input:checked ~label:before {
+    background-color: rgb(37, 204, 76) !important
+}
+
+.ui.fitted.toggle.checkbox .box:before, .ui.fitted.toggle.checkbox label:before {
+    background-color: grey;
+}
+
+/* add widespace gutter/margin if screen size over 1280px */
+@media screen and (min-width: 1280px) {
+  .nav-container {
+    margin-left: 10%;
+    margin-right: 10%
+  }
+}
