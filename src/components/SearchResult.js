@@ -2,41 +2,22 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 class SearchResult extends React.Component {
-  
+
   componentDidMount(){
-    let test = this.props.dates;
-    let testArr = test.split("-");
-    let B = RegExp(/B/);
-    let A = RegExp(/A/);
-    let execArr = [];
-    let dateBegin;
-    let dateEnd;
-    
-    testArr.forEach((el, index) => {
-      if (B.exec(el)){
-        execArr = B.exec(el);
-        if (index === 0) {
-          dateBegin = el
-        } else {
-          dateEnd = el
-        }
-      } else if (A.exec(el)){
-        execArr = A.exec(el);
-        if (index === 0){
-          dateBegin = el
-        } else {
-          dateEnd = el
-        }
-      } else if (el === " Present") {
-        if (index === 0){
-          dateBegin = el
-        } else {
-          dateEnd = el
-        }
-      }
-    })
-    debugger;
-    // fetch(`https://collectionapi.metmuseum.org/public/collection/v1/search?q=*&departmentId=${props.departmentId}&dateBegin=${}&dateEnd=${}&isHighlight`)
+      
+    let URL;
+
+    if (this.props.departmentId !== typeof(Number) && this.props.dates === "" && this.props.isHighlight === false) {
+      URL = "https://collectionapi.metmuseum.org/public/collection/v1/search?q=*"
+    } else {
+      URL = `https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=${this.props.departmentId}&dateBegin=${this.props.dateBegin}&dateEnd=${this.props.dateEnd}&isHighlight=${this.props.isHighlight}&q=*`
+    } 
+
+    console.log("URL", URL)
+
+    fetch(URL)
+    .then(resp => resp.json())
+    .then(data => console.log(data.total))
   }
 
   render(){
@@ -50,14 +31,15 @@ class SearchResult extends React.Component {
 };
 
 function msp(state){
-  
-  const { departmentId, dates, isHighlight } = state.searchReducer;
-  
+  const { departmentId, dates, isHighlight, dateBegin, dateEnd } = state.searchReducer;
+  return { departmentId, dates, isHighlight, dateBegin, dateEnd }
+};
+
+function mdp(dispatch){
   return {
-    departmentId: departmentId,
-    dates: dates,
-    isHighlight: isHighlight
+  //need this? 
   }
 };
 
-export default connect(msp)(SearchResult);
+export default connect(msp, mdp)(SearchResult);
+

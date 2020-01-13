@@ -1,7 +1,9 @@
 const defaultState = {
-  departmentId: null,
+  departmentId: "*",
   dates: "",
   isHighlight: false,
+  dateBegin: -8000,
+  dateEnd: new Date().getFullYear()
 }
 
 function searchReducer(prevState = defaultState, action){
@@ -12,6 +14,12 @@ function searchReducer(prevState = defaultState, action){
       return {...prevState, dates: action.payload}
     case "SET_HIGHLIGHT":  
       return {...prevState, isHighlight: action.payload}
+    case "SET_SEARCH_DATES":
+      return {
+        ...prevState, 
+        dateBegin: parseInt(action.payload.dateBegin),
+        dateEnd: parseInt(action.payload.dateEnd)
+      }
     default:
       return prevState
   }
