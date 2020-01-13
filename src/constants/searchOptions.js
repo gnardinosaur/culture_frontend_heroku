@@ -24,8 +24,8 @@ const departmentOptions = [
 const dateOptions = [
   { key: 1, value: "8000 - 2000 B.C.", text: "8000 - 2000 B.C."},
   { key: 2, value: "2000 - 1000 B.C.", text: "2000 - 1000 B.C."},
-  { key: 3, value: "1000 B.C - A.D. 1", text: "1000 B.C - A.D. 1"},
-  { key: 4, value: "A.D. 1 - A.D. 500", text: "A.D. 1 - A.D. 500"},
+  { key: 3, value: "1000 B.C. - A.D. 1", text: "1000 B.C - A.D. 1"},
+  { key: 4, value: "A.D. 1 - 500", text: "A.D. 1 - 500"},
   { key: 5, value: "A.D. 500 - 1000", text: "A.D. 500 - 1000"},
   { key: 6, value: "A.D. 1000 - 1400", text: "A.D. 1000 - 1400"},
   { key: 7, value: "A.D. 1400 - 1600", text: "A.D. 1400 - 1600"},

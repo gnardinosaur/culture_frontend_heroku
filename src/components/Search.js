@@ -3,12 +3,24 @@ import { connect } from 'react-redux';
 import { Dropdown, Checkbox, Button } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import { departmentOptions, dateOptions } from '../constants/searchOptions'
+import { parseSearchDates } from '../helperFunctions';
+
 
 function Search(props){
 
   function handleClick(){
+    if (props.dates === "") {
+      props.setSearchDates(-8000, new Date().getFullYear())
+    } else {
+      const parsedDatesArr = parseSearchDates(props.dates)
+      props.setSearchDates(parsedDatesArr[0], parsedDatesArr[1])
+    }
     props.changeURL("/art")
   }
+
+  // function changeURL(){
+  //   props.changeURL("/art")
+  // } 
 
   return (
     <div className="search">
@@ -26,6 +38,11 @@ function Search(props){
   )
 }
 
+function msp(state){
+  const { dates } = state.searchReducer;
+  return { dates }
+}
+
 function mdp(dispatch){
   return {
     handleChange: (e, data) => {
@@ -39,8 +56,14 @@ function mdp(dispatch){
         type: data.name,
         payload: data.checked
       })
+    },
+    setSearchDates: (dateBegin, dateEnd) => {
+      dispatch({
+        type: "SET_SEARCH_DATES",
+        payload: { dateBegin, dateEnd }
+      })
     }
   }
 }
 
-export default connect(null, mdp)(Search);
+export default connect(msp, mdp)(Search);
