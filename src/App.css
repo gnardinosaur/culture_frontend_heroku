@@ -68,6 +68,12 @@ hr {
   margin-top: 50px;
 }
 
+.search-result {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 5%;
+}
+
 /* semantic-ui adjustments --> change toggle color to green  */
 .ui.fitted.toggle.checkbox input:focus:checked~label:before,
 .ui.fitted.toggle.checkbox input:focus:checked~label:before,

@@ -18,10 +18,6 @@ function Search(props){
     props.changeURL("/art")
   }
 
-  // function changeURL(){
-  //   props.changeURL("/art")
-  // } 
-
   return (
     <div className="search">
       <h3>Filter Search:</h3>
