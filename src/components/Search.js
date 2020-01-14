@@ -17,22 +17,21 @@ class Search extends React.Component {
   }
 
   handleClick = () => {
-    //how can I use thunk or async/await in this function so that store gets udpated and returned BEFORE I call this.fetchArtObjects?
     if (this.props.dates !== "") {
       const parsedDatesArr = parseSearchDates(this.props.dates);
       this.props.setSearchDates(parsedDatesArr[0], parsedDatesArr[1]);
-      this.fetchArtObjects(parsedDatesArr[0], parsedDatesArr[1])
+      this.fetchArtObjects()
     } else {
-      this.fetchArtObjects(-8000, new Date().getFullYear())
+      this.fetchArtObjects()
     }
   }
 
-  fetchArtObjects = (start, end) => {
+  fetchArtObjects = () => {
     let URL;
     if (this.props.departmentId !== typeof(Number) && this.props.dates === "" && this.props.isHighlight === false) {
       URL = "https://collectionapi.metmuseum.org/public/collection/v1/search?q=*"
     } else {
-      URL = `https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=${this.props.departmentId}&dateBegin=${start}&dateEnd=${end}&isHighlight=${this.props.isHighlight}&q=*`
+      URL = `https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=${this.props.departmentId}&dateBegin=${this.props.dateBegin}&dateEnd=${this.props.dateEnd}&isHighlight=${this.props.isHighlight}&q=*`
     }
     fetch(URL)
     .then(resp => resp.json())
@@ -94,17 +93,10 @@ class Search extends React.Component {
           }
           artObjectsWithDescriptions.push(el);
         })
-        this.props.saveArtObjects(artObjectsWithDescriptions)
+        this.props.saveArtObjects(artObjectsWithDescriptions);
+        this.props.changeURL("/art")
       })
-      // put outside } but inside )this.props.changeURL("/art")
-      // ^ how does this.props.changeURL() work as second argument in .thne() ???
     })
-  }
-
-  componentDidUpdate(prevProps){
-    if(prevProps.threeArtObjects !== this.props.threeArtObjects) {
-      this.props.changeURL("/art")
-    }
   }
 
   render() {
