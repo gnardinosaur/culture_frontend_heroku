@@ -102,7 +102,6 @@ class Search extends React.Component {
   }
 
   componentDidUpdate(prevProps){
-    console.log(this.props.threeArtObjects)
     if(prevProps.threeArtObjects !== this.props.threeArtObjects) {
       this.props.changeURL("/art")
     }

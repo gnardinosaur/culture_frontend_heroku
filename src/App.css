@@ -26,6 +26,7 @@
 
 .nav-container h3 {
   margin-right: 10%;
+  cursor: pointer;
 }
 
 .home {
@@ -74,6 +75,17 @@ hr {
   margin-top: 5%;
 }
 
+#heart-btn {
+  margin-left: 5%;
+  color: lightcoral
+}
+
+.ui.icon.button {
+  background-color: rgb(106, 126, 151);
+  color:whitesmoke
+}
+
+
 /* semantic-ui adjustments --> change toggle color to green  */
 .ui.fitted.toggle.checkbox input:focus:checked~label:before,
 .ui.fitted.toggle.checkbox input:focus:checked~label:before,
@@ -91,5 +103,10 @@ hr {
   .nav-container {
     margin-left: 10%;
     margin-right: 10%
+  }
+
+  .search-result {
+    margin-left: 15%;
+    margin-right: 15%
   }
 }
