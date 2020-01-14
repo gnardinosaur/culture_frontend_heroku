@@ -3,7 +3,8 @@ const defaultState = {
   dates: "",
   isHighlight: false,
   dateBegin: -8000,
-  dateEnd: new Date().getFullYear()
+  dateEnd: new Date().getFullYear(),
+  threeArtObjects: []
 }
 
 function searchReducer(prevState = defaultState, action){
@@ -20,6 +21,8 @@ function searchReducer(prevState = defaultState, action){
         dateBegin: parseInt(action.payload.dateBegin),
         dateEnd: parseInt(action.payload.dateEnd)
       }
+    case "SAVE_ART_OBJECTS":
+      return {...prevState, threeArtObjects: action.payload }
     default:
       return prevState
   }
