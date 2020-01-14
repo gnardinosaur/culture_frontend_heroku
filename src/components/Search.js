@@ -95,8 +95,17 @@ class Search extends React.Component {
           artObjectsWithDescriptions.push(el);
         })
         this.props.saveArtObjects(artObjectsWithDescriptions)
-      }, this.props.changeURL("/art"))
+      })
+      // put outside } but inside )this.props.changeURL("/art")
+      // ^ how does this.props.changeURL() work as second argument in .thne() ???
     })
+  }
+
+  componentDidUpdate(prevProps){
+    console.log(this.props.threeArtObjects)
+    if(prevProps.threeArtObjects !== this.props.threeArtObjects) {
+      this.props.changeURL("/art")
+    }
   }
 
   render() {
