@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Grid, Image, Button, Icon} from 'semantic-ui-react';
+import { Grid, Image, Button, Icon, Segment } from 'semantic-ui-react';
 import { threeTestObjects } from '../constants/threeTestObjects'
 
 class SearchResult extends React.Component {
@@ -47,14 +47,16 @@ class SearchResult extends React.Component {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column width={10}>
-              <Image src={testingObjArr[this.state.counter].img} />
+              <Image src={testingObjArr[this.state.counter].img} centered rounded />
             </Grid.Column>
             <Grid.Column width={6}>
-              {/* it's possible to add scrolling semantic <Segment> if wanted */}
-              <h2>{testingObjArr[this.state.counter].title}</h2>
-              <h3>{testingObjArr[this.state.counter].artist}</h3>
-              <h3>{testingObjArr[this.state.counter].date}</h3>
-              <h4>{testingObjArr[this.state.counter].description}</h4>
+              <Segment style={{overflow: 'auto', maxHeight: 500 }} textAlign="left">
+                <h2>{testingObjArr[this.state.counter].title}</h2>
+                <h3>{testingObjArr[this.state.counter].date}</h3>
+                <h4>{testingObjArr[this.state.counter].artist ? testingObjArr[this.state.counter].artist : testingObjArr[this.state.counter].culture}</h4>
+                <br />
+                {testingObjArr[this.state.counter].description.length > 1 ? testingObjArr[this.state.counter].description.map(el => <p>{el}</p>) : testingObjArr[this.state.counter].description }
+              </Segment>
             </Grid.Column>
           </Grid.Row>
         </Grid>

@@ -1,5 +1,8 @@
-.app {
+body #root {
   font-family: 'Libre Franklin', sans-serif;
+}
+
+.app {
   text-align: center;
   box-sizing: border-box;
 }
@@ -21,7 +24,8 @@
   max-width: auto;
   border-radius: 3px;
   margin: 10px;
-  margin-left: 10%
+  margin-left: 10%;
+  cursor: pointer;
 }
 
 .nav-container h3 {
@@ -75,6 +79,10 @@ hr {
   margin-top: 5%;
 }
 
+.ui.left.aligned.segment h3 {
+  color: slategray
+}
+
 #heart-btn {
   margin-left: 5%;
   color: lightcoral
@@ -85,6 +93,27 @@ hr {
   color:whitesmoke
 }
 
+.ui.image {
+  max-height: 500px;
+  width: auto;
+}
+
+.ui.container.sign-in-container {
+  width: 40%;
+  margin-top: 5%;
+}
+
+.ui.button.sign-in-btn {
+  background-color: rgb(106, 126, 151);
+  color:whitesmoke;
+  width: 100%;
+}
+
+.ui.button.create-acct-btn {
+  background-color: rgb(1, 175, 123);
+  color:whitesmoke;
+  width: 100%;
+}
 
 /* semantic-ui adjustments --> change toggle color to green  */
 .ui.fitted.toggle.checkbox input:focus:checked~label:before,

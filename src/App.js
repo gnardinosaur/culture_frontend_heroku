@@ -3,10 +3,10 @@ import './App.css';
 import NavBar from './components/NavBar';
 import Content from './components/Content';
 
-function App() {
+function App(props) {
   return (
     <div className="app">
-      <NavBar />
+      <NavBar changeURL={props.history.push} />
       <Content />
     </div>
   );
