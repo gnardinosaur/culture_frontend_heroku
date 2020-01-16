@@ -1,15 +1,38 @@
 import React from 'react';
-import logo from '../logo.jpg'
+import { connect } from 'react-redux';
+import logo from '../logo.jpg';
+import { List } from 'semantic-ui-react';
+
 
 function NavBar(props) {
+  
+  function linksRender(){
+    if (props.loggedIn) {
+      return (
+        <List horizontal>
+          <List.Item id="nav-link">Favorites |</List.Item>
+          <List.Item id="nav-link">Scheduled Emails |</List.Item>
+          <List.Item id="nav-link">Log Out</List.Item>
+        </List>
+      )
+    } else {
+      return <h3 id="nav-link" onClick={() => props.changeURL("/login")}>Sign In / Sign Up</h3>  
+    }
+  };
+
   return (
     <div className="nav-bar">
       <div className="nav-container"> 
         <img onClick={() => props.changeURL("/")} src={logo} alt="logo" />
-        <h3 onClick={() => props.changeURL("/login")}>Sign In / Sign Up</h3>  
+        {linksRender()}
       </div>
     </div>
   )
-}
+};
 
-export default NavBar;
+function msp(state){
+  const { loggedIn } = state.userReducer
+  return { loggedIn }
+};
+
+export default connect(msp)(NavBar);

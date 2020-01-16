@@ -33,6 +33,16 @@ body #root {
   cursor: pointer;
 }
 
+.ui.horizontal.list {
+  margin-right: 10%;
+  cursor: pointer;
+}
+
+#nav-link {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
 .home {
   margin-top: 5%;
 }

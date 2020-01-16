@@ -14,7 +14,12 @@ class SearchResult extends React.Component {
       this.setState({ counter: this.state.counter - 1 })
     } else { 
       if (this.state.counter === 2) {
-        this.props.history.push("/email")
+        if (this.props.loggedIn) {
+          this.props.history.push("/email")  
+        } else {
+          this.props.savePath(this.props.history.location.pathname)
+          this.props.history.push("/login")
+        }
       } else {
         this.setState({ counter: this.state.counter + 1 })
       }
@@ -68,12 +73,18 @@ class SearchResult extends React.Component {
 
 function msp(state){
   const { threeArtObjects } = state.searchReducer;
-  return { threeArtObjects }
+  const { loggedIn } = state.userReducer
+  return { threeArtObjects, loggedIn }
 };
 
 function mdp(dispatch){
   return {
-  //do I need mdp in this component? 
+    savePath: (path) => {
+      dispatch({
+        type: "SAVE_PATH",
+        payload: path
+      })
+    }
   }
 };
 
