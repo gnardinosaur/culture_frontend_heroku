@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Container, Button, Form, Modal } from 'semantic-ui-react'
 
 class SignUp extends React.Component {
@@ -59,7 +60,7 @@ class SignUp extends React.Component {
       }
     })
     //add user to store
-    console.log(responseData.body.user)
+    this.props.setUser(responseData.body.user)
     //if user came from home redirect to "/profile", if they came from last art page send to email setup page with saved search data
     this.props.history.push("/profile")
   }
@@ -112,4 +113,15 @@ class SignUp extends React.Component {
   }
 };
 
-export default SignUp;
+function mdp(dispatch){
+  return {
+    setUser: (userData) => {
+      dispatch({
+        type: "SET_USER",
+        payload: userData
+      })
+    }
+  }
+}
+
+export default connect(null, mdp)(SignUp);

@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Dropdown, Checkbox, Button } from 'semantic-ui-react';
-import 'semantic-ui-css/semantic.min.css';
 import { departmentOptions, dateOptions } from '../constants/searchOptions'
 import { parseSearchDates } from '../helperFunctions';
 import { getRandomInclusive } from '../helperFunctions';
