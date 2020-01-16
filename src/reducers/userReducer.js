@@ -13,6 +13,8 @@ function userReducer(prevState = defaultState, action){
   switch(action.type){  
     case "SET_USER":  
       return {...prevState, user: action.payload, loggedIn: true}
+    case "LOG_OUT":  
+      return {...prevState, user: {}, loggedIn: false}
     default:
       return prevState
   }
