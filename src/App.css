@@ -121,7 +121,7 @@ hr {
 
 #email-h1 {
   margin-top: 5%;
-  color: slategray
+  color: rgb(68, 68, 68)
 }
 
 .ui.button.sign-in-btn {
@@ -132,6 +132,12 @@ hr {
 
 .ui.button.create-acct-btn {
   background-color: rgb(1, 175, 123);
+  color:whitesmoke;
+  width: 100%;
+}
+
+.ui.button.email-btn {
+  background-color: rgb(106, 126, 151);
   color:whitesmoke;
   width: 100%;
 }

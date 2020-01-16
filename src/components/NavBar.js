@@ -12,7 +12,7 @@ function NavBar(props) {
         <List horizontal>
           <List.Item id="nav-link">Favorites |</List.Item>
           <List.Item id="nav-link">Scheduled Emails |</List.Item>
-          <List.Item id="nav-link">Log Out</List.Item>
+          <List.Item onClick={() => props.logOut()} id="nav-link">Log Out</List.Item>
         </List>
       )
     } else {
@@ -35,4 +35,14 @@ function msp(state){
   return { loggedIn }
 };
 
-export default connect(msp)(NavBar);
+function mdp(dispatch){
+  return {
+    logOut: () => {
+      dispatch({
+        type: "LOG_OUT"
+      })
+    }
+  }
+}
+
+export default connect(msp, mdp)(NavBar);
