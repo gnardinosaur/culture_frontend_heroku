@@ -12,8 +12,8 @@ class EmailSignUp extends React.Component {
     email: "",
   }
 
-  getDepartmentName = (props) => {
-    let deptArr = departmentOptions.filter(obj => obj.key === props.departmentId);
+  getDeptName = () => {
+    let deptArr = departmentOptions.filter(obj => obj.key === this.props.departmentId);
     return deptArr[0].text  
   }
 
@@ -40,7 +40,6 @@ class EmailSignUp extends React.Component {
   }
 
   render(){
-    console.log(this.state)
     return (
       <Container>
         <Segment>
@@ -48,7 +47,7 @@ class EmailSignUp extends React.Component {
             <Grid.Column>
               <Header as="h3">Department -</Header> 
               {this.props.departmentId !== "*" ? 
-                <p style={{ color: "green", fontWeight: "bold" }}>{this.getDepartmentName}</p>
+                <p style={{ color: "green", fontWeight: "bold" }}>{this.getDeptName()}</p>
               : 
                 <p style={{ color: "red", fontWeight: "bold" }}>No Department Selected</p>
               }

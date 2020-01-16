@@ -32,6 +32,8 @@ class Search extends React.Component {
     } else {
       URL = `https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=${this.props.departmentId}&dateBegin=${this.props.dateBegin}&dateEnd=${this.props.dateEnd}&isHighlight=${this.props.isHighlight}&q=*`
     }
+    //URL logic ^ not working correctly
+    console.log(URL)
     fetch(URL)
     .then(resp => resp.json())
     .then(data => this.getThreeIDs(data.objectIDs))
@@ -42,7 +44,7 @@ class Search extends React.Component {
     let indexNums = [];    
     for (let i = 0; i < 3; i++) {
       indexNums.push(getRandomInclusive(0, objectIDsArr.length))
-    }
+    } 
     indexNums.forEach(el => objectIDs.push(objectIDsArr[el]))
     this.setState({ objectIDs });
     this.buildWorkObjects()
