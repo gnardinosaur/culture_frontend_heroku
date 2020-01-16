@@ -39,10 +39,14 @@ class Login extends React.Component {
       })
     })
     .then(resp => resp.json().then(data => ({ status: resp.status, body: data })))
-    .then(  responseData => {
+    .then(responseData => {
       if (responseData.status === 202) {
         this.props.setUser(responseData.body.user)
-        this.props.history.push("/")
+        if (this.props.path === "/art") {
+          this.props.history.push("/email")
+        } else {
+          this.props.history.push("/")
+        }
       } else {
         this.setState({ showFailedLoginModal: true })
       }

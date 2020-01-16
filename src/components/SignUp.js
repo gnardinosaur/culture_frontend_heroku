@@ -59,7 +59,6 @@ class SignUp extends React.Component {
         phone: ""
       }
     })
-    //add user to store
     this.props.setUser(responseData.body.user)
     //if user came from home redirect to "/profile", if they came from last art page send to email setup page with saved search data
     this.props.history.push("/profile")
