@@ -113,6 +113,17 @@ hr {
   margin-top: 5%;
 }
 
+/* this is for the params email container @ /email*/
+.ui.container {
+  width: 75%;
+  margin-top: 5%;
+}
+
+#email-h1 {
+  margin-top: 5%;
+  color: slategray
+}
+
 .ui.button.sign-in-btn {
   background-color: rgb(106, 126, 151);
   color:whitesmoke;

@@ -60,7 +60,7 @@ class SearchResult extends React.Component {
                 <h3>{testingObjArr[this.state.counter].date}</h3>
                 <h4>{testingObjArr[this.state.counter].artist ? testingObjArr[this.state.counter].artist : testingObjArr[this.state.counter].culture}</h4>
                 <br />
-                {testingObjArr[this.state.counter].description.length > 1 ? testingObjArr[this.state.counter].description.map(el => <p>{el}</p>) : testingObjArr[this.state.counter].description }
+                {testingObjArr[this.state.counter].description ? testingObjArr[this.state.counter].description.map(el => <p>{el}</p>) : "" }
               </Segment>
             </Grid.Column>
           </Grid.Row>
