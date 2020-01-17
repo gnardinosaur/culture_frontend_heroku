@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Grid, Image, Button, Icon, Segment } from 'semantic-ui-react';
 import { threeTestObjects } from '../constants/threeTestObjects'
+import FadeLoader from 'react-spinners/FadeLoader';
 
 class SearchResult extends React.Component {
 
@@ -35,36 +36,49 @@ class SearchResult extends React.Component {
     } else {
       testingObjArr = this.props.threeArtObjects
     }
+    // #####
+
+    let content;
+
+    if (this.props.threeArtObjects.length === 0) {
+      content = 
+        <div style={{ position: "fixed", top: "30%", left: "50%"}} >
+            <FadeLoader color={"#25cc4c"}/>
+        </div>
+    } else {
+      content = 
+        <Grid>
+            <Grid.Row>
+              <Grid.Column width={8} textAlign="left">
+                <Button id="heart-btn" icon>
+                  <Icon name="heart"/>
+                </Button> 
+              </Grid.Column>
+              <Grid.Column width={8} textAlign="right">
+                <Button onClick={this.moveArt} content="Back" icon="left arrow" labelPosition="left" disabled={this.state.counter === 0 ? true : false} />
+                <Button onClick={this.moveArt} content="Next" icon="right arrow" labelPosition="right" />
+              </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+              <Grid.Column width={10}>
+                <Image src={testingObjArr[this.state.counter].img} centered rounded />
+              </Grid.Column>
+              <Grid.Column width={6}>
+                <Segment style={{overflow: 'auto', maxHeight: 500 }} textAlign="left">
+                  <h2>{testingObjArr[this.state.counter].title}</h2>
+                  <h3>{testingObjArr[this.state.counter].date}</h3>
+                  <h4>{testingObjArr[this.state.counter].artist ? testingObjArr[this.state.counter].artist : testingObjArr[this.state.counter].culture}</h4>
+                  <br />
+                  {testingObjArr[this.state.counter].description ? testingObjArr[this.state.counter].description.map(el => <p>{el}</p>) : "" }
+                </Segment>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+    }
 
     return (
       <div className="search-result">
-        <Grid>
-          <Grid.Row>
-            <Grid.Column width={8} textAlign="left">
-              <Button id="heart-btn" icon>
-                <Icon name="heart"/>
-              </Button> 
-            </Grid.Column>
-            <Grid.Column width={8} textAlign="right">
-              <Button onClick={this.moveArt} content="Back" icon="left arrow" labelPosition="left" disabled={this.state.counter === 0 ? true : false} />
-              <Button onClick={this.moveArt} content="Next" icon="right arrow" labelPosition="right" />
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row>
-            <Grid.Column width={10}>
-              <Image src={testingObjArr[this.state.counter].img} centered rounded />
-            </Grid.Column>
-            <Grid.Column width={6}>
-              <Segment style={{overflow: 'auto', maxHeight: 500 }} textAlign="left">
-                <h2>{testingObjArr[this.state.counter].title}</h2>
-                <h3>{testingObjArr[this.state.counter].date}</h3>
-                <h4>{testingObjArr[this.state.counter].artist ? testingObjArr[this.state.counter].artist : testingObjArr[this.state.counter].culture}</h4>
-                <br />
-                {testingObjArr[this.state.counter].description ? testingObjArr[this.state.counter].description.map(el => <p>{el}</p>) : "" }
-              </Segment>
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
+        {content}
       </div>
     )
   }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { departmentOptions } from '../constants/searchOptions';
 import { Container, Grid, Header, Segment, Dropdown, Button, Form } from 'semantic-ui-react';
 import { dayOptions, timeOptions } from '../constants/emailOptions';
+import { fetchArtObjects } from '../helperFunctions';
 
 class EmailSignUp extends React.Component {
 
@@ -26,17 +27,31 @@ class EmailSignUp extends React.Component {
   }
 
   createEmail = () => {
-    console.log("heyo")
-    // fetch("http://localhost:3000/api/v1/searches", {
-    //   method: "POST",
-    //   headers: {
-    //     'Content-Type' : 'application/json',
-    //     'Accept': 'application/json'
-    //   },
-    //   body: JSON.stringify({
+    fetchArtObjects(this.props.departmentId, this.props.dateBegin, this.props.dateEnd, this.props.isHighlight, this.state.numDays, this.postArtToRails)
+  }
 
-    //   })
-    // })
+  postArtToRails = (artObjects) => {
+    let userEmail = this.state.email ? this.state.email : this.props.email
+    
+    //give artObjects to Rails API 
+    fetch("http://localhost:3000/api/v1/schedules", {
+      method: "POST",
+      headers: {
+        'Content-Type' : 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${this.props.jwt}`
+      },
+      body: JSON.stringify({
+        userID: this.props.id,
+        email: userEmail,
+        art: artObjects,
+        department: this.getDeptName(),
+        highlight: this.props.isHighlight,
+        dates: this.props.dates,
+        days: this.state.numDays,
+        time: this.state.time
+      })
+    })
   }
 
   render(){
@@ -47,7 +62,7 @@ class EmailSignUp extends React.Component {
             <Grid.Column>
               <Header as="h3">Department -</Header> 
               {this.props.departmentId !== "*" ? 
-                <p style={{ color: "green", fontWeight: "bold" }}>{this.getDeptName()}</p>
+                <p style={{ color: "rgb(1, 175, 123)", fontWeight: "bold" }}>{this.getDeptName()}</p>
               : 
                 <p style={{ color: "red", fontWeight: "bold" }}>No Department Selected</p>
               }
@@ -55,7 +70,7 @@ class EmailSignUp extends React.Component {
             <Grid.Column>
               <Header as="h3">Dates -</Header> 
               {this.props.dates ? 
-                <p style={{ color: "green", fontWeight: "bold" }}>{this.props.dates}</p>
+                <p style={{ color: "rgb(1, 175, 123)", fontWeight: "bold" }}>{this.props.dates}</p>
               : 
                 <p style={{ color: "red", fontWeight: "bold" }}>No Dates Selected</p>
               }
@@ -63,7 +78,7 @@ class EmailSignUp extends React.Component {
             <Grid.Column>
               <Header as="h3">Collection Highlights?</Header> 
               {this.props.isHighlight ? 
-                <p style={{ color: "green", fontWeight: "bold" }}>Yes</p>
+                <p style={{ color: "rgb(1, 175, 123)", fontWeight: "bold" }}>Yes</p>
                 : 
                 <p style={{ color: "red", fontWeight: "bold" }}>No</p>
                 }
@@ -101,9 +116,10 @@ class EmailSignUp extends React.Component {
 
 
 function msp(state){
-  const { departmentId, dates, isHighlight } = state.searchReducer;
-  const { email } = state.userReducer.user
-  return { departmentId, dates, isHighlight, email }
+  const { departmentId, dates, isHighlight, dateBegin, dateEnd } = state.searchReducer;
+  const { email, id } = state.userReducer.user
+  const { jwt } = state.userReducer
+  return { departmentId, dates, isHighlight, dateBegin, dateEnd, email, id, jwt }
 }
 
 export default connect(msp)(EmailSignUp);

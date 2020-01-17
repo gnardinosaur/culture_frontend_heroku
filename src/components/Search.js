@@ -1,96 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Dropdown, Checkbox, Button } from 'semantic-ui-react';
-import { parseSearchDates } from '../helperFunctions';
-import { departmentOptions, dateOptions } from '../constants/searchOptions'
-import { getRandomInclusive } from '../helperFunctions';
-import axios from 'axios';
-import cheerio from 'cheerio';
-
+import { parseSearchDates, fetchArtObjects } from '../helperFunctions';
+import { departmentOptions, dateOptions } from '../constants/searchOptions';
 
 class Search extends React.Component {
 
-  state = {
-    objectIDs: [],
-    threeWorkObjs: []
-  }
-
   handleClick = () => {
-    this.fetchArtObjects()
+    let deptID = this.props.departmentId;
+    let dateBegin = this.props.dateBegin;
+    let dateEnd = this.props.dateEnd;
+    let isHighlight = this.props.isHighlight;
+    fetchArtObjects(deptID, dateBegin, dateEnd, isHighlight, 3, this.props.saveArtObjects);
+    this.props.changeURL("/art")
   }
 
   handleDateChange = (e, data) => {
     this.props.handleChange(e, data)
     const parsedDatesArr = parseSearchDates(data.value);
     this.props.setSearchDates(parsedDatesArr[0], parsedDatesArr[1]);
-  }
-
-  fetchArtObjects = () => {
-    let URL = `https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=${this.props.departmentId}&dateBegin=${this.props.dateBegin}&dateEnd=${this.props.dateEnd}&isHighlight=${this.props.isHighlight}&q=*`
-    fetch(URL)
-    .then(resp => resp.json())
-    .then(data => this.getThreeIDs(data.objectIDs))
-  }
-
-  getThreeIDs = (objectIDsArr) => {
-    let objectIDs = [];
-    let indexNums = [];    
-    for (let i = 0; i < 3; i++) {
-      indexNums.push(getRandomInclusive(0, objectIDsArr.length))
-    } 
-    indexNums.forEach(el => objectIDs.push(objectIDsArr[el]))
-    this.setState({ objectIDs });
-    this.buildWorkObjects()
-  }
-
-  buildWorkObjects = () => {
-    let threeWorkObjs = [];
-    this.state.objectIDs.forEach(el => {
-      fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${el}`)
-      .then(resp => resp.json())
-      .then(art => { 
-        let oneWork = {
-          ID: art.objectID,
-          img: art.primaryImage,
-          department: art.department,
-          title: art.title,
-          culture: art.culture,
-          artist: art.artistDisplayName,
-          date: art.objectDate
-        };
-        threeWorkObjs.push(oneWork);
-        this.setState({ threeWorkObjs }, () => {
-          if (this.state.threeWorkObjs.length === 3) {
-            this.addDescriptions();
-          }
-        })
-      })
-    })
-  }
-
-  addDescriptions = () => {
-    let artObjectsWithDescriptions = [];
-    this.state.threeWorkObjs.forEach(el => {
-      axios.get(`https://www.metmuseum.org/art/collection/search/${el.ID}`)
-      .then((resp) => {
-        let html = resp.data;
-        let $ = cheerio.load(html);
-        let textNodes;
-        let itemDescriptionArr = [];
-        $('.artwork__intro__desc').each(function(){ 
-          textNodes = $(this).find('p').contents(); 
-          for (let i = 0; i < textNodes.length; i++) {
-            if (textNodes[i].type === "text") {
-              itemDescriptionArr.push(textNodes[i].data)
-            }
-            el.description = itemDescriptionArr;
-          }
-          artObjectsWithDescriptions.push(el);
-        })
-        this.props.saveArtObjects(artObjectsWithDescriptions);
-        this.props.changeURL("/art")
-      })
-    })
   }
 
   render() {
