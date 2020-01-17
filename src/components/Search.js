@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Dropdown, Checkbox, Button } from 'semantic-ui-react';
-import { departmentOptions, dateOptions } from '../constants/searchOptions'
 import { parseSearchDates } from '../helperFunctions';
+import { departmentOptions, dateOptions } from '../constants/searchOptions'
 import { getRandomInclusive } from '../helperFunctions';
 import axios from 'axios';
 import cheerio from 'cheerio';
@@ -16,23 +16,22 @@ class Search extends React.Component {
   }
 
   handleClick = () => {
-    if (this.props.dates !== "") {
-      const parsedDatesArr = parseSearchDates(this.props.dates);
-      this.props.setSearchDates(parsedDatesArr[0], parsedDatesArr[1]);
-      this.fetchArtObjects()
-    } else {
-      this.fetchArtObjects()
-    }
+    this.fetchArtObjects()
+  }
+
+  handleDateChange = (e, data) => {
+    this.props.handleChange(e, data)
+    const parsedDatesArr = parseSearchDates(data.value);
+    this.props.setSearchDates(parsedDatesArr[0], parsedDatesArr[1]);
   }
 
   fetchArtObjects = () => {
     let URL;
-    if (this.props.departmentId !== typeof(Number) && this.props.dates === "" && this.props.isHighlight === false) {
+    if (this.props.departmentId === Number) {
       URL = "https://collectionapi.metmuseum.org/public/collection/v1/search?q=*"
     } else {
       URL = `https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=${this.props.departmentId}&dateBegin=${this.props.dateBegin}&dateEnd=${this.props.dateEnd}&isHighlight=${this.props.isHighlight}&q=*`
     }
-    //URL logic ^ not working correctly
     console.log(URL)
     fetch(URL)
     .then(resp => resp.json())
@@ -106,7 +105,7 @@ class Search extends React.Component {
         <h3>Filter Search:</h3>
         <div className="filters">
           <Dropdown onChange={this.props.handleChange} placeholder="Department" name="SET_DEPARTMENT" clearable selection options={departmentOptions} />
-          <Dropdown onChange={this.props.handleChange} placeholder="Date / Era" name="SET_DATES" clearable selection options={dateOptions} />
+          <Dropdown onChange={this.handleDateChange} placeholder="Date / Era" name="SET_DATES" clearable selection options={dateOptions} />
           <div className="reco">
             <Checkbox onChange={this.props.handleCheck} name="SET_HIGHLIGHT" toggle />
             <h4 id="toggle-lbl">Collection Highlight (Recommended)</h4>
