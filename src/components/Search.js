@@ -26,13 +26,7 @@ class Search extends React.Component {
   }
 
   fetchArtObjects = () => {
-    let URL;
-    if (this.props.departmentId === Number) {
-      URL = "https://collectionapi.metmuseum.org/public/collection/v1/search?q=*"
-    } else {
-      URL = `https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=${this.props.departmentId}&dateBegin=${this.props.dateBegin}&dateEnd=${this.props.dateEnd}&isHighlight=${this.props.isHighlight}&q=*`
-    }
-    console.log(URL)
+    let URL = `https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=${this.props.departmentId}&dateBegin=${this.props.dateBegin}&dateEnd=${this.props.dateEnd}&isHighlight=${this.props.isHighlight}&q=*`
     fetch(URL)
     .then(resp => resp.json())
     .then(data => this.getThreeIDs(data.objectIDs))
