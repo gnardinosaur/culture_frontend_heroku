@@ -41,7 +41,7 @@ class Login extends React.Component {
     .then(resp => resp.json().then(data => ({ status: resp.status, body: data })))
     .then(responseData => {
       if (responseData.status === 202) {
-        this.props.setUser(responseData.body.user)
+        this.props.setUser(responseData.body)
         if (this.props.path === "/art") {
           this.props.history.push("/email")
         } else {
