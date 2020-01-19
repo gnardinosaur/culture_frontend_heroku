@@ -10,7 +10,7 @@ function NavBar(props) {
     if (props.loggedIn) {
       return (
         <List horizontal>
-          <List.Item id="nav-link">Favorites |</List.Item>
+          <List.Item onClick={() => props.changeURL("/favorites")} id="nav-link">Favorites |</List.Item>
           <List.Item id="nav-link">Scheduled Emails |</List.Item>
           <List.Item onClick={() => props.logOut()} id="nav-link">Log Out</List.Item>
         </List>

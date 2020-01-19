@@ -6,6 +6,7 @@ import EmailSignUp from './EmailSignUp';
 import Login from './Login';
 import SignUp from './SignUp';
 import Profile from './Profile';
+import Favorites from './Favorites';
 
 
 function Content() {
@@ -16,6 +17,7 @@ function Content() {
       <Route path="/login" component={Login} />
       <Route path="/sign_up" component={SignUp} />
       <Route path="/profile" component={Profile} />
+      <Route path="/favorites" component={Favorites} />
       <Route path="/" component={Home} />
     </Switch>
   )  

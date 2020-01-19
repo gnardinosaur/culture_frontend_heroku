@@ -87,7 +87,6 @@ function buildWorkObjects(objectIDs, num, cb){
 }
 
 function addDescriptions(artObjs, num, cb){
-  console.log("add descripts", artObjs)
   let artObjectsWithDescriptions = [];
   artObjs.forEach(el => {
     axios.get(`https://www.metmuseum.org/art/collection/search/${el.ID}`)
