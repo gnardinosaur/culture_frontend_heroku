@@ -27,6 +27,21 @@ class SearchResult extends React.Component {
     }
   }
 
+  favorite = () => {
+    fetch("http://localhost:3000/api/v1/favorites", {
+      method: "POST",
+      headers: {
+        'Content-Type' : 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${this.props.jwt}`
+      },
+      body: JSON.stringify({ 
+        user_id: this.props.id,
+        artwork: this.props.threeArtObjects[this.state.counter]
+      })
+    })
+  }
+
   render(){
     // replace this code and in Grid.Columns once app is live, this is just a way to have a full array of art objects withough fetching from The Met API 
     let testingObjArr = [];
@@ -40,17 +55,18 @@ class SearchResult extends React.Component {
 
     let content;
 
-    if (this.props.threeArtObjects.length === 0) {
-      content = 
-        <div style={{ position: "fixed", top: "30%", left: "50%"}} >
-            <FadeLoader color={"#25cc4c"}/>
-        </div>
-    } else {
+    // if (this.props.threeArtObjects.length === 0) {
+      
+    //   content = 
+    //     <div style={{ position: "fixed", top: "30%", left: "50%"}} >
+    //         <FadeLoader color={"#25cc4c"}/>
+    //     </div>
+    // } else {
       content = 
         <Grid>
             <Grid.Row>
               <Grid.Column width={8} textAlign="left">
-                <Button id="heart-btn" icon>
+                <Button id="heart-btn" icon onClick={this.favorite}>
                   <Icon name="heart"/>
                 </Button> 
               </Grid.Column>
@@ -74,7 +90,7 @@ class SearchResult extends React.Component {
               </Grid.Column>
             </Grid.Row>
           </Grid>
-    }
+    // }
 
     return (
       <div className="search-result">
@@ -87,8 +103,9 @@ class SearchResult extends React.Component {
 
 function msp(state){
   const { threeArtObjects } = state.searchReducer;
-  const { loggedIn } = state.userReducer
-  return { threeArtObjects, loggedIn }
+  const { loggedIn, jwt } = state.userReducer;
+  const { id } = state.userReducer.user
+  return { threeArtObjects, loggedIn, jwt, id }
 };
 
 function mdp(dispatch){
