@@ -6,6 +6,10 @@ import { departmentOptions, dateOptions } from '../constants/searchOptions';
 
 class Search extends React.Component {
 
+  componentDidMount(){
+    this.props.clearSearchParams()
+  }
+
   handleClick = () => {
     let deptID = this.props.departmentId;
     let dateBegin = this.props.dateBegin;
@@ -46,6 +50,11 @@ function msp(state){
 
 function mdp(dispatch){
   return {
+    clearSearchParams: () => {
+      dispatch({
+        type: "CLEAR_SEARCH_PARAMS"
+      })
+    },
     handleChange: (e, data) => {
       dispatch({
         type: data.name,
