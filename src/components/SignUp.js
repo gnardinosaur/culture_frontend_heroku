@@ -59,9 +59,16 @@ class SignUp extends React.Component {
         phone: ""
       }
     })
-    this.props.setUser(responseData.body.user)
-    //if user came from home redirect to "/profile", if they came from last art page send to email setup page with saved search data
+    this.props.setUser(responseData.body)
+    this.redirect()
+  }
+
+  redirect = () => {
+    if (this.props.havePathValue) {
+      this.props.history.push("/email")
+    } else {
     this.props.history.push("/profile")
+    }
   }
 
   toggleModal = () => {
@@ -112,6 +119,11 @@ class SignUp extends React.Component {
   }
 };
 
+function msp(state){
+  const { havePathValue } = state.searchResultReducer
+  return { havePathValue }
+}
+
 function mdp(dispatch){
   return {
     setUser: (userData) => {
@@ -123,4 +135,4 @@ function mdp(dispatch){
   }
 }
 
-export default connect(null, mdp)(SignUp);
+export default connect(msp, mdp)(SignUp);

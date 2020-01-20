@@ -14,7 +14,12 @@ const defaultState = {
 function userReducer(prevState = defaultState, action){
   switch(action.type){  
     case "SET_USER":  
-      return {...prevState, user: action.payload.user, loggedIn: true, jwt: action.payload.jwt}
+      return {
+        ...prevState, 
+        user: action.payload.user, 
+        loggedIn: true, 
+        jwt: action.payload.jwt
+      }
     case "LOG_OUT":  
       return {...prevState, user: {}, loggedIn: false}
     default:

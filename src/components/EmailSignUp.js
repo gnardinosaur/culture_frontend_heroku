@@ -55,6 +55,7 @@ class EmailSignUp extends React.Component {
   }
 
   render(){
+    console.log(this.props.email)
     return (
       <Container>
         <Segment>
