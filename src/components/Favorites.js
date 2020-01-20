@@ -10,7 +10,7 @@ class Favorites extends React.Component {
   }
   
   componentDidMount(){
-    fetch(`http://localhost:3000/api/v1/user/${this.props.id}/favorites`, {
+    fetch(`http://localhost:3000/api/v1/users/${this.props.id}/favorites`, {
       method: "GET",
       headers: {
         'Content-Type' : 'application/json',

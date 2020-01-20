@@ -58,7 +58,7 @@ class EmailSignUp extends React.Component {
     console.log(this.props.email)
     return (
       <Container>
-        <Segment>
+        <Segment secondary>
           <Grid columns={3}>
             <Grid.Column>
               <Header as="h3">Department -</Header> 

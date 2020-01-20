@@ -117,7 +117,6 @@ hr {
   margin-top: 5%;
 }
 
-/* this is for the params email container @ /email*/
 .ui.container {
   width: 75%;
   margin-top: 5%;
@@ -156,6 +155,19 @@ hr {
 
 #unfav {
   background:rgb(106, 126, 151);
+}
+
+#delete-email {
+  float: right;
+  cursor: pointer;
+}
+
+h5.ui.header {
+  margin-top: 5px;
+}
+
+.ui.header+p {
+  margin-left: 2%;
 }
 
 /* semantic-ui adjustments --> change toggle color to green  */
