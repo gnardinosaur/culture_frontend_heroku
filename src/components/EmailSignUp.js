@@ -14,8 +14,12 @@ class EmailSignUp extends React.Component {
   }
 
   getDeptName = () => {
-    let deptArr = departmentOptions.filter(obj => obj.key === this.props.departmentId);
-    return deptArr[0].text  
+    if(this.props.departmentId === "*" || this.props.departmentId === "") {
+      return "No Department Selected"
+    } else {
+      let deptArr = departmentOptions.filter(obj => obj.key === this.props.departmentId);
+      return deptArr[0].text  
+    }
   }
 
   handleChange = (e, data) => {
@@ -27,7 +31,7 @@ class EmailSignUp extends React.Component {
   }
 
   createEmail = () => {
-    fetchArtObjects(this.props.departmentId, this.props.dateBegin, this.props.dateEnd, this.props.isHighlight, this.state.numDays, this.postArtToRails)
+    fetchArtObjects(this.props.departmentId, this.props.dateBegin, this.props.dateEnd, this.props.isHighlight, this.state.numDays, this.postArtToRails);    
   }
 
   postArtToRails = (artObjects) => {
@@ -52,17 +56,17 @@ class EmailSignUp extends React.Component {
         time: this.state.time
       })
     })
+    .then(this.props.history.push("/scheduled_emails"))
   }
 
   render(){
-    console.log(this.props.email)
     return (
       <Container>
         <Segment secondary>
           <Grid columns={3}>
             <Grid.Column>
               <Header as="h3">Department -</Header> 
-              {this.props.departmentId !== "*" ? 
+              {this.props.departmentId !== "*" && this.props.departmentId !== "" ? 
                 <p style={{ color: "rgb(1, 175, 123)", fontWeight: "bold" }}>{this.getDeptName()}</p>
               : 
                 <p style={{ color: "red", fontWeight: "bold" }}>No Department Selected</p>

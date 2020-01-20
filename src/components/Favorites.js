@@ -6,7 +6,7 @@ import unfavorite from '../unfavorite.png'
 class Favorites extends React.Component {
 
   state = {
-    favorites: []
+    favoriteArtworks: []
   }
   
   componentDidMount(){
@@ -19,23 +19,38 @@ class Favorites extends React.Component {
       }
     })
     .then(resp => resp.json())
-    .then(favorites => this.setState({ favorites }))
+    .then(data => this.setState({ 
+      favoriteArtworks: data.artworks,
+      favoritesIDs: data.favorite_ids,
+     }))
+  }
+
+  unfavorite = (e) => {  
+    fetch(`http://localhost:3000/api/v1/favorites/${e.target.parentNode.id}`, {
+      method: "DELETE",
+      headers: {
+        'Content-Type' : 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${this.props.jwt}`
+      }
+    })
+    .then(this.hideCard(e.target.parentNode))
+  }
+
+  hideCard = (node) => {
+    node.style.display = "none"
   }
 
   render(){
-    
-    let renderFavs = this.state.favorites.map(fav => {
+    let renderFavs = this.state.favoriteArtworks.map((fav, index) => {
+      let cardID = this.state.favoritesIDs[index]
      return (
-      <Card>
+      <Card key={cardID} id={cardID} >
         <Image src={fav.img_url} wrapped ui={false} size="small"/>
         <Card.Content>
           <Card.Header>{fav.title}</Card.Header>
-          {/* <Card.Meta>Joined in 2016</Card.Meta> */}
-          {/* <Card.Description>
-            Daniel is a comedian living in Nashville.
-          </Card.Description> */}
         </Card.Content>
-        <Card.Content id="unfav" extra>
+        <Card.Content onClick={this.unfavorite} id="unfav" extra>
           <Image src={unfavorite} size="mini" />      
         </Card.Content>
       </Card>
