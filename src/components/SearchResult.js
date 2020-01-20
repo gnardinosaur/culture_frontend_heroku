@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Grid, Image, Button, Icon, Segment } from 'semantic-ui-react';
-import { threeTestObjects } from '../constants/threeTestObjects';
 import unfavorite from '../unfavorite.png';
 import FadeLoader from 'react-spinners/FadeLoader';
 
@@ -70,16 +69,6 @@ class SearchResult extends React.Component {
   }
 
   render(){
-    console.log(this.state.favItems)
-    // replace this code and in Grid.Columns once app is live, this is just a way to have a full array of art objects withough fetching from The Met API 
-    let testingObjArr = [];
-
-    if (this.props.threeArtObjects.length === 0) {
-      testingObjArr = threeTestObjects
-    } else {
-      testingObjArr = this.props.threeArtObjects
-    }
-    // #####
 
     let favButton = this.state.favItems[this.state.counter] ? 
       <Button id="heart-btn" icon onClick={this.unfavorite} > 
@@ -92,13 +81,13 @@ class SearchResult extends React.Component {
 
     let content;
 
-    // if (this.props.threeArtObjects.length === 0) {
+    if (this.props.threeArtObjects.length === 0) {
       
-    //   content = 
-    //     <div style={{ position: "fixed", top: "30%", left: "50%"}} >
-    //         <FadeLoader color={"#25cc4c"}/>
-    //     </div>
-    // } else {
+      content = 
+        <div style={{ position: "fixed", top: "30%", left: "50%"}} >
+            <FadeLoader color={"#25cc4c"}/>
+        </div>
+    } else {
       content = 
         <Grid>
             <Grid.Row>
@@ -112,20 +101,20 @@ class SearchResult extends React.Component {
             </Grid.Row>
             <Grid.Row>
               <Grid.Column width={10}>
-                <Image src={testingObjArr[this.state.counter].img} centered rounded />
+                <Image src={this.props.threeArtObjects[this.state.counter].img} centered rounded />
               </Grid.Column>
               <Grid.Column width={6}>
                 <Segment style={{overflow: 'auto', maxHeight: 500 }} textAlign="left">
-                  <h2>{testingObjArr[this.state.counter].title}</h2>
-                  <h3>{testingObjArr[this.state.counter].date}</h3>
-                  <h4>{testingObjArr[this.state.counter].artist ? testingObjArr[this.state.counter].artist : testingObjArr[this.state.counter].culture}</h4>
+                  <h2>{this.props.threeArtObjects[this.state.counter].title}</h2>
+                  <h3>{this.props.threeArtObjects[this.state.counter].date}</h3>
+                  <h4>{this.props.threeArtObjects[this.state.counter].artist ? this.props.threeArtObjects[this.state.counter].artist : this.props.threeArtObjects[this.state.counter].culture}</h4>
                   <br />
-                  {testingObjArr[this.state.counter].description ? testingObjArr[this.state.counter].description.map(el => <p>{el}</p>) : "" }
+                  {this.props.threeArtObjects[this.state.counter].description ? this.props.threeArtObjects[this.state.counter].description.map(el => <p>{el}</p>) : "" }
                 </Segment>
               </Grid.Column>
             </Grid.Row>
           </Grid>
-    // }
+    }
 
     return (
       <div className="search-result">

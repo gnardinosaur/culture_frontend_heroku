@@ -34,9 +34,7 @@ export function parseSearchDates(dateString){
       dateEnd = el.replace(/\D/g, "")
     }
   })
-
   return [dateBegin, dateEnd]
-
 };
 
 function getRandomInclusive(min, max){

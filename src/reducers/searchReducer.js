@@ -18,6 +18,8 @@ function searchReducer(prevState = defaultState, action){
         dateEnd: new Date().getFullYear(),
         threeArtObjects: [] 
       }
+    case "CLEAR_ART_OBJECTS":
+      return {...prevState, threeArtObjects: {} }
     case "SET_DEPARTMENT":  
       return {...prevState, departmentId: action.payload}
     case "SET_DATES":  

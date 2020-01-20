@@ -21,7 +21,7 @@ class Search extends React.Component {
 
   handleDateChange = (e, data) => {
     this.props.handleChange(e, data)
-    const parsedDatesArr = parseSearchDates(data.value);
+    const parsedDatesArr = parseSearchDates(data.value ? data.value : `8000 - ${new Date().getFullYear()}`);
     this.props.setSearchDates(parsedDatesArr[0], parsedDatesArr[1]);
   }
 
