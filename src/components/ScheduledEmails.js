@@ -56,6 +56,7 @@ class ScheduledEmail extends React.Component {
 
   render(){
     let content = this.state.scheduledEmails.map(email => {
+      console.log(email.department)
       return (
         <Segment key={email.id} secondary raised textAlign="left" id={email.id}>
           <Icon onClick={(e) => this.deleteScheduledEmail(e)} id="delete-email" name="x" color="red"/>
