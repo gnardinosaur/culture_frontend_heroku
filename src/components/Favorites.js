@@ -1,7 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Card, Image } from 'semantic-ui-react';
+import unfavorite from '../unfavorite.png'
 
 class Favorites extends React.Component {
+
+  state = {
+    favorites: []
+  }
   
   componentDidMount(){
     fetch(`http://localhost:3000/api/v1/user/${this.props.id}/favorites`, {
@@ -13,14 +19,36 @@ class Favorites extends React.Component {
       }
     })
     .then(resp => resp.json())
-    .then(console.log)
-    //map through the returned array of favorites, add as flex grid on page with img and title and unfav btn, when clicked the "card" goes to the searchResult component of the piece of art 
+    .then(favorites => this.setState({ favorites }))
   }
 
   render(){
+    
+    let renderFavs = this.state.favorites.map(fav => {
+     return (
+      <Card>
+        <Image src={fav.img_url} wrapped ui={false} size="small"/>
+        <Card.Content>
+          <Card.Header>{fav.title}</Card.Header>
+          {/* <Card.Meta>Joined in 2016</Card.Meta> */}
+          {/* <Card.Description>
+            Daniel is a comedian living in Nashville.
+          </Card.Description> */}
+        </Card.Content>
+        <Card.Content id="unfav" extra>
+          <Image src={unfavorite} size="mini" />      
+        </Card.Content>
+      </Card>
+     )
+    })
+    
     return (
-      <div>
-        favorites page
+      <div className="favs">
+        <h2>Favorites -</h2>
+        <hr />
+        <Card.Group centered>
+          {renderFavs}
+        </Card.Group>
       </div>
     )
   }

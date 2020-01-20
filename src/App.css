@@ -95,8 +95,12 @@ hr {
 
 #heart-btn {
   margin-left: 5%;
-  color: lightcoral
+  color: lightcoral;
+  width: 40px;
+  height: 36px;
 }
+
+
 
 .ui.icon.button {
   background-color: rgb(106, 126, 151);
@@ -142,6 +146,18 @@ hr {
   width: 100%;
 }
 
+.favs h2 {
+  margin-top: 2%;
+}
+
+.favs hr {
+  margin-bottom: 2%;
+}
+
+#unfav {
+  background:rgb(106, 126, 151);
+}
+
 /* semantic-ui adjustments --> change toggle color to green  */
 .ui.fitted.toggle.checkbox input:focus:checked~label:before,
 .ui.fitted.toggle.checkbox input:focus:checked~label:before,
@@ -164,5 +180,10 @@ hr {
   .search-result {
     margin-left: 15%;
     margin-right: 15%
+  }
+
+  .ui.cards {
+    margin-left: 10%;
+    margin-right: 10%
   }
 }

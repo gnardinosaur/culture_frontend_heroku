@@ -9,6 +9,15 @@ const defaultState = {
 
 function searchReducer(prevState = defaultState, action){
   switch(action.type){  
+    case "CLEAR_SEARCH_PARAMS":
+      return { 
+        departmentId: "*",
+        dates: "",
+        isHighlight: false,
+        dateBegin: -8000,
+        dateEnd: new Date().getFullYear(),
+        threeArtObjects: [] 
+      }
     case "SET_DEPARTMENT":  
       return {...prevState, departmentId: action.payload}
     case "SET_DATES":  
