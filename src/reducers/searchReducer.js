@@ -21,6 +21,9 @@ function searchReducer(prevState = defaultState, action){
     case "CLEAR_ART_OBJECTS":
       return {...prevState, threeArtObjects: {} }
     case "SET_DEPARTMENT":  
+      if (action.payload === "") {
+        action.payload = "*"
+      }
       return {...prevState, departmentId: action.payload}
     case "SET_DATES":  
       return {...prevState, dates: action.payload}

@@ -6,7 +6,8 @@ import unfavorite from '../unfavorite.png'
 class Favorites extends React.Component {
 
   state = {
-    favoriteArtworks: []
+    favoriteArtworks: [],
+    favoritesIDs: [],
   }
   
   componentDidMount(){
@@ -25,8 +26,9 @@ class Favorites extends React.Component {
      }))
   }
 
-  unfavorite = (e) => {  
-    fetch(`http://localhost:3000/api/v1/favorites/${e.target.parentNode.id}`, {
+  unfavorite = (e) => { 
+    let card = e.target.closest('#favorite-card');
+    fetch(`http://localhost:3000/api/v1/favorites/${card.dataset.id}`, {
       method: "DELETE",
       headers: {
         'Content-Type' : 'application/json',
@@ -34,18 +36,19 @@ class Favorites extends React.Component {
         'Authorization': `Bearer ${this.props.jwt}`
       }
     })
-    .then(this.hideCard(e.target.parentNode))
+    .then(this.hideCard(card))
   }
-
+  
   hideCard = (node) => {
-    node.style.display = "none"
+    let card = node.closest('#favorite-card')
+    card.style.display = "none"
   }
 
   render(){
     let renderFavs = this.state.favoriteArtworks.map((fav, index) => {
       let cardID = this.state.favoritesIDs[index]
      return (
-      <Card key={cardID} id={cardID} >
+      <Card key={cardID} id="favorite-card" data-id={cardID} >
         <Image src={fav.img_url} wrapped ui={false} size="small"/>
         <Card.Content>
           <Card.Header>{fav.title}</Card.Header>
