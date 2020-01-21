@@ -14,12 +14,8 @@ class EmailSignUp extends React.Component {
   }
 
   getDeptName = () => {
-    if(this.props.departmentId === "*" || this.props.departmentId === "") {
-      return "No Department Selected"
-    } else {
-      let deptArr = departmentOptions.filter(obj => obj.key === this.props.departmentId);
-      return deptArr[0].text  
-    }
+    let deptArr = departmentOptions.filter(obj => obj.key === this.props.departmentId);
+    return deptArr[0].text  
   }
 
   handleChange = (e, data) => {
@@ -31,12 +27,13 @@ class EmailSignUp extends React.Component {
   }
 
   createEmail = () => {
-    fetchArtObjects(this.props.departmentId, this.props.dateBegin, this.props.dateEnd, this.props.isHighlight, this.state.numDays, this.postArtToRails);    
+    fetchArtObjects(this.props.departmentId, this.props.dateBegin, this.props.dateEnd, this.props.isHighlight, this.state.numDays, this.postScheduleToRails);    
   }
 
-  postArtToRails = (artObjects) => {
-    let userEmail = this.state.email ? this.state.email : this.props.email
-    
+  postScheduleToRails = (artObjects) => {
+    let userEmail = this.state.email ? this.state.email : this.props.email;
+    let department = this.props.departmentId === "*" ? "No Department Selected" : this.getDeptName();
+
     //give artObjects to Rails API 
     fetch("http://localhost:3000/api/v1/schedules", {
       method: "POST",
@@ -49,7 +46,7 @@ class EmailSignUp extends React.Component {
         userID: this.props.id,
         email: userEmail,
         art: artObjects,
-        department: this.getDeptName(),
+        department: department,
         highlight: this.props.isHighlight,
         dates: this.props.dates,
         days: this.state.numDays,
@@ -66,7 +63,7 @@ class EmailSignUp extends React.Component {
           <Grid columns={3}>
             <Grid.Column>
               <Header as="h3">Department -</Header> 
-              {this.props.departmentId !== "*" && this.props.departmentId !== "" ? 
+              {this.props.departmentId !== "*" ? 
                 <p style={{ color: "rgb(1, 175, 123)", fontWeight: "bold" }}>{this.getDeptName()}</p>
               : 
                 <p style={{ color: "red", fontWeight: "bold" }}>No Department Selected</p>

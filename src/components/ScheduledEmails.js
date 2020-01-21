@@ -56,29 +56,29 @@ class ScheduledEmail extends React.Component {
 
   render(){
     let content = this.state.scheduledEmails.map(email => {
-      console.log(email.department)
-      return (
-        <Segment key={email.id} secondary raised textAlign="left" id={email.id}>
-          <Icon onClick={(e) => this.deleteScheduledEmail(e)} id="delete-email" name="x" color="red"/>
-          <Header as="h5">Department -</Header>
-            {email.department ? <p style={{ color: "rgb(1, 175, 123)", fontWeight: "bold" }}>{email.department}</p> : <p style={{ color: "red", fontWeight: "bold" }}>No Department Selected</p>}
-          <Header as="h5">Dates -</Header>
-            {email.dates ? <p style={{ color: "rgb(1, 175, 123)", fontWeight: "bold" }}>{email.dates}</p> : <p style={{ color: "red", fontWeight: "bold" }}>No Dates Selected</p>}
-          <Header as="h5">Collection Highlights?</Header>
-            {email.highlight ? <p style={{ color: "rgb(1, 175, 123)", fontWeight: "bold" }}>Yes</p> : <p style={{ color: "red", fontWeight: "bold" }}>No</p>}  
-          <Header as="h5">Time -</Header>
-            <p style={{ color: "rgb(1, 175, 123)", fontWeight: "bold" }}>{email.time} a.m.</p>
-          {/* <Header as="h5">Currently Active?</Header>
-            {this.isActive(email.created_at, email.days) ? <p style={{ color: "rgb(1, 175, 123)", fontWeight: "bold" }}>Yes</p> : <p style={{ color: "red", fontWeight: "bold" }}>No</p>}   */}
-        </Segment>
-      )
-    })
-
+    
     return (
-      <Container textAlign="left">
-        <h2>Scheduled Emails -</h2>
-        {content}
-      </Container>
+      <Segment key={email.id} secondary raised textAlign="left" id={email.id}>
+        <Icon onClick={(e) => this.deleteScheduledEmail(e)} id="delete-email" name="x" color="red"/>
+        <Header as="h5">Department -</Header>
+          {email.department !== "No Department Selected" ? <p style={{ color: "rgb(1, 175, 123)", fontWeight: "bold" }}>{email.department}</p> : <p style={{ color: "red", fontWeight: "bold" }}>No Department Selected</p>}
+        <Header as="h5">Dates -</Header>
+          {email.dates ? <p style={{ color: "rgb(1, 175, 123)", fontWeight: "bold" }}>{email.dates}</p> : <p style={{ color: "red", fontWeight: "bold" }}>No Dates Selected</p>}
+        <Header as="h5">Collection Highlights?</Header>
+          {email.highlight ? <p style={{ color: "rgb(1, 175, 123)", fontWeight: "bold" }}>Yes</p> : <p style={{ color: "red", fontWeight: "bold" }}>No</p>}  
+        <Header as="h5">Time -</Header>
+          <p style={{ color: "rgb(1, 175, 123)", fontWeight: "bold" }}>{email.time} a.m.</p>
+        {/* <Header as="h5">Currently Active?</Header>
+          {this.isActive(email.created_at, email.days) ? <p style={{ color: "rgb(1, 175, 123)", fontWeight: "bold" }}>Yes</p> : <p style={{ color: "red", fontWeight: "bold" }}>No</p>}   */}
+      </Segment>
+    )
+  })
+
+  return (
+    <Container textAlign="left">
+      <h2>Scheduled Emails -</h2>
+      {content}
+    </Container>
     )
   }
 };
