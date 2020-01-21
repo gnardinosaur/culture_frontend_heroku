@@ -37,23 +37,6 @@ class ScheduledEmail extends React.Component {
     node.style.display = "none"
   }
 
-  // isActive = (dateCreated, numDays) => {
-  //   let lastDayOfSchedule = new Date(dateCreated).getDate() + numDays
-  //   let monthOfSchedule = new Date(dateCreated).getMonth()
-
-  //   let currentDay = new Date().getDate()
-  //   let currentMonth = new Date().getMonth()
-
-  //   // NEED TO FIGURE OUT LOGIC FOR DISPLAYING ACTIVE OR NOT && THEN CAN SORT BY THIS VALUE
-  //   if (lastDayOfSchedule > currentDay && monthOfSchedule === currentMonth) {
-  //     console.log("Yes")
-  //   } else if (lastDayOfSchedule > currentDay && monthOfSchedule < currentMonth) {
-  //     console.log("No")
-  //   } else {
-  //     console.log("Yes")
-  //   }
-  // }
-
   render(){
     let content = this.state.scheduledEmails.map(email => {
     

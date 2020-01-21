@@ -95,13 +95,18 @@ function addDescriptions(artObjs, num, cb){
       let itemDescriptionArr = [];
       $('.artwork__intro__desc').each(function(){ 
         textNodes = $(this).find('p').contents(); 
-        for (let i = 0; i < textNodes.length; i++) {
-          if (textNodes[i].type === "text") {
-            itemDescriptionArr.push(textNodes[i].data)
+        if (textNodes.length > 0) {
+          for (let i = 0; i < textNodes.length; i++) {
+            if (textNodes[i].type === "text") {
+              itemDescriptionArr.push(textNodes[i].data)
+            }
+            el.description = itemDescriptionArr;
           }
-          el.description = itemDescriptionArr;
+          artObjectsWithDescriptions.push(el);
+        } else {
+          el.description = ["No Description Available"];
+          artObjectsWithDescriptions.push(el);
         }
-        artObjectsWithDescriptions.push(el);
       })
       if (artObjectsWithDescriptions.length === num) {
         cb(artObjectsWithDescriptions)

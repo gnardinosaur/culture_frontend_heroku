@@ -34,7 +34,7 @@ class EmailSignUp extends React.Component {
     let userEmail = this.state.email ? this.state.email : this.props.email;
     let department = this.props.departmentId === "*" ? "No Department Selected" : this.getDeptName();
 
-    //give artObjects to Rails API 
+    //give artObjects to Rails API/Schedules controller
     fetch("http://localhost:3000/api/v1/schedules", {
       method: "POST",
       headers: {
@@ -53,7 +53,25 @@ class EmailSignUp extends React.Component {
         time: this.state.time
       })
     })
-    .then(this.props.history.push("/scheduled_emails"))
+    .then(resp => resp.json())
+    .then(artwork => this.sendConfirmationEmail(artwork))
+  }
+
+  sendConfirmationEmail = (artwork) => {
+    fetch('http://localhost:3000/api/v1/emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${this.props.jwt}`
+      },
+      body: JSON.stringify({
+        userID: this.props.id,
+        artworkID: artwork.id
+      })
+    })
+    //after email sent redirect to /scheduled_emails tab
+    //this.props.history.push("/scheduled_emails")
   }
 
   render(){

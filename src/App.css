@@ -155,6 +155,7 @@ hr {
 
 #unfav {
   background:lightcoral;
+  cursor: pointer;
 }
 
 #delete-email {

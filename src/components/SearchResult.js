@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Grid, Image, Button, Icon, Segment } from 'semantic-ui-react';
-import unfavorite from '../unfavorite.png';
 import FadeLoader from 'react-spinners/FadeLoader';
 
 class SearchResult extends React.Component {
@@ -72,11 +71,11 @@ class SearchResult extends React.Component {
 
     let favButton = this.state.favItems[this.state.counter] ? 
       <Button id="heart-btn" icon onClick={this.unfavorite} > 
-        <Image src={unfavorite} /> 
+        <Icon name="heart" />
       </Button> 
       : 
       <Button id="heart-btn" icon onClick={this.favorite} >
-        <Icon  name="heart" />
+        <Icon name="heart outline" />
       </Button>
 
     let content;
