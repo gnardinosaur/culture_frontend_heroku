@@ -32,7 +32,7 @@ class EmailSignUp extends React.Component {
 
   postScheduleToRails = (artObjects) => {
     let userEmail = this.state.email ? this.state.email : this.props.email;
-    let department = this.props.departmentId === "*" ? "No Department Selected" : this.getDeptName();
+    let department = this.props.departmentId === "*" ? "No Department Selected" : this.getDeptName;
 
     //give artObjects to Rails API/Schedules controller
     fetch("http://localhost:3000/api/v1/schedules", {
@@ -58,6 +58,15 @@ class EmailSignUp extends React.Component {
   }
 
   sendConfirmationEmail = (artwork) => {
+    let searchParams = {
+      department: this.props.departmentId !== "*" ? this.getDeptName : "No Department Selected",
+      dates: this.props.dates ? this.props.dates : "No Dates Selected",
+      highlight: this.props.isHighlight ? "Yes" : "No"
+    };
+    let scheduleParams = {
+      numDays: this.state.numDays,
+      time: this.state.time
+    }
     fetch('http://localhost:3000/api/v1/emails', {
       method: 'POST',
       headers: {
@@ -67,7 +76,9 @@ class EmailSignUp extends React.Component {
       },
       body: JSON.stringify({
         userID: this.props.id,
-        artworkID: artwork.id
+        artworkID: artwork.id,
+        searchParams: searchParams,
+        scheduleParams: scheduleParams
       })
     })
     //after email sent redirect to /scheduled_emails tab
