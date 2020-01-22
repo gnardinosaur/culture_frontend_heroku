@@ -171,6 +171,10 @@ h5.ui.header {
   margin-left: 2%;
 }
 
+.small.image {
+  cursor: pointer;
+}
+
 /* semantic-ui adjustments --> change toggle color to green  */
 .ui.fitted.toggle.checkbox input:focus:checked~label:before,
 .ui.fitted.toggle.checkbox input:focus:checked~label:before,

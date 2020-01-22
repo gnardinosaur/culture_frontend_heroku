@@ -28,7 +28,7 @@ class Favorites extends React.Component {
 
   unfavorite = (e) => { 
     let card = e.target.closest('#favorite-card');
-    fetch(`http://localhost:3000/api/v1/favorites/${card.dataset.id}`, {
+    fetch(`http://localhost:3000/api/v1/favorites/${card.dataset.fav}`, {
       method: "DELETE",
       headers: {
         'Content-Type' : 'application/json',
@@ -44,12 +44,19 @@ class Favorites extends React.Component {
     card.style.display = "none"
   }
 
+  showFavorite = (e) => {
+    let artID = e.target.closest('#favorite-card').dataset.art;
+    this.props.setFavoriteShowID(artID);
+    this.props.history.push('/favorite_show')
+  }
+
   render(){
     let renderFavs = this.state.favoriteArtworks.map((fav, index) => {
       let cardID = this.state.favoritesIDs[index]
+      let favID = fav.id
      return (
-      <Card key={cardID} id="favorite-card" data-id={cardID} >
-        <Image src={fav.img_url} wrapped ui={false} size="small"/>
+      <Card key={cardID} id="favorite-card" data-fav={cardID} data-art={favID}>
+        <Image onClick={this.showFavorite} src={fav.img_url} wrapped ui={false} size="small"/>
         <Card.Content>
           <Card.Header>{fav.title}</Card.Header>
         </Card.Content>
@@ -75,6 +82,17 @@ class Favorites extends React.Component {
 function msp(state){
   const { id } = state.userReducer.user;
   return { id }
+};
+
+function mdp(dispatch){
+  return {
+    setFavoriteShowID: (id) => {
+      dispatch({
+        type: "SET_FAV_SHOW_ID",
+        payload: id
+      })
+    }
+  }
 }
 
-export default connect(msp)(Favorites);
+export default connect(msp, mdp)(Favorites);

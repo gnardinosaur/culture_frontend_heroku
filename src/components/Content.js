@@ -7,6 +7,7 @@ import Login from './Login';
 import SignUp from './SignUp';
 import Profile from './Profile';
 import Favorites from './Favorites';
+import FavoriteShow from './FavoriteShow';
 import ScheduledEmails from './ScheduledEmails';
 
 
@@ -19,6 +20,7 @@ function Content() {
       <Route path="/sign_up" component={SignUp} />
       <Route path="/profile" component={Profile} />
       <Route path="/favorites" component={Favorites} />
+      <Route path="/favorite_show" component={FavoriteShow} />
       <Route path="/scheduled_emails" component={ScheduledEmails} />
       <Route path="/" component={Home} />
     </Switch>

@@ -87,6 +87,8 @@ class SearchResult extends React.Component {
             <FadeLoader color={"#25cc4c"}/>
         </div>
     } else {
+      let descriptionArrString = this.props.threeArtObjects[this.state.counter].description
+      let desciptionHTML = <div dangerouslySetInnerHTML={{__html: descriptionArrString}} />
       content = 
         <Grid>
             <Grid.Row>
@@ -108,7 +110,8 @@ class SearchResult extends React.Component {
                   <h3>{this.props.threeArtObjects[this.state.counter].date}</h3>
                   <h4>{this.props.threeArtObjects[this.state.counter].artist ? this.props.threeArtObjects[this.state.counter].artist : this.props.threeArtObjects[this.state.counter].culture}</h4>
                   <br />
-                  {this.props.threeArtObjects[this.state.counter].description ? this.props.threeArtObjects[this.state.counter].description.map(el => <p>{el}</p>) : "" }
+                  {desciptionHTML}
+                  {/* {this.props.threeArtObjects[this.state.counter].description.map(el => <p>{el}</p>)} */}
                 </Segment>
               </Grid.Column>
             </Grid.Row>
