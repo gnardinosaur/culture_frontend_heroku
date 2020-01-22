@@ -34,7 +34,7 @@ class SearchResult extends React.Component {
       headers: {
         'Content-Type' : 'application/json',
         'Accept': 'application/json',
-        'Authorization': `Bearer ${this.props.jwt}`
+        'Authorization': `Bearer ${localStorage.token}`
       },
       body: JSON.stringify({ 
         user_id: this.props.id,
@@ -60,7 +60,7 @@ class SearchResult extends React.Component {
       headers: {
         'Content-Type' : 'application/json',
         'Accept': 'application/json',
-        'Authorization': `Bearer ${this.props.jwt}`
+        'Authorization': `Bearer ${localStorage.token}`
       }
     })
     .then(resp => resp.json())
@@ -126,9 +126,9 @@ class SearchResult extends React.Component {
 
 function msp(state){
   const { threeArtObjects } = state.searchReducer;
-  const { loggedIn, jwt } = state.userReducer;
+  const { loggedIn } = state.userReducer;
   const { id } = state.userReducer.user
-  return { threeArtObjects, loggedIn, jwt, id }
+  return { threeArtObjects, loggedIn, id }
 };
 
 function mdp(dispatch){

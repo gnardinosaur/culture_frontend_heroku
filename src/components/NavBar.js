@@ -5,6 +5,12 @@ import { List } from 'semantic-ui-react';
 
 
 function NavBar(props) {
+
+  function removeLocalStorageToken(){
+    localStorage.removeItem('token');
+    props.logOut()
+    props.changeURL("/")
+  }
   
   function linksRender(){
     if (props.loggedIn) {
@@ -13,7 +19,7 @@ function NavBar(props) {
           <List.Item onClick={() => props.changeURL("/favorites")} id="nav-link">Favorites |</List.Item>
           <List.Item onClick={() => props.changeURL("/scheduled_emails")} id="nav-link">Scheduled Emails |</List.Item>
           <List.Item onClick={() => props.changeURL("/profile")} id="nav-link">Profile |</List.Item>
-          <List.Item onClick={() => props.logOut()} id="nav-link">Log Out</List.Item>
+          <List.Item onClick={() => removeLocalStorageToken()} id="nav-link">Log Out</List.Item>
         </List>
       )
     } else {

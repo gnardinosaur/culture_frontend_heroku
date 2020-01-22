@@ -41,6 +41,7 @@ class SignUp extends React.Component {
     .then(resp => resp.json().then(data => ({ status: resp.status, body: data })))
     .then(responseData => {
       if (responseData.status === 201) {
+        localStorage.token = responseData.body.jwt
         this.handleResponse(responseData)
       } else {
         this.setState({ showModal: true })

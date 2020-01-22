@@ -32,7 +32,7 @@ class EmailSignUp extends React.Component {
 
   postScheduleToRails = (artObjects) => {
     let userEmail = this.state.email ? this.state.email : this.props.email;
-    let department = this.props.departmentId === "*" ? "No Department Selected" : this.getDeptName;
+    let department = this.props.departmentId === "*" ? "No Department Selected" : this.getDeptName();
 
     //give artObjects to Rails API/Schedules controller
     fetch("http://localhost:3000/api/v1/schedules", {
@@ -40,7 +40,7 @@ class EmailSignUp extends React.Component {
       headers: {
         'Content-Type' : 'application/json',
         'Accept': 'application/json',
-        'Authorization': `Bearer ${this.props.jwt}`
+        'Authorization': `Bearer ${localStorage.token}`
       },
       body: JSON.stringify({
         userID: this.props.id,
@@ -59,7 +59,7 @@ class EmailSignUp extends React.Component {
 
   sendConfirmationEmail = (artwork) => {
     let searchParams = {
-      department: this.props.departmentId !== "*" ? this.getDeptName : "No Department Selected",
+      department: this.props.departmentId !== "*" ? this.getDeptName() : "No Department Selected",
       dates: this.props.dates ? this.props.dates : "No Dates Selected",
       highlight: this.props.isHighlight ? "Yes" : "No"
     };
@@ -72,7 +72,7 @@ class EmailSignUp extends React.Component {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': `Bearer ${this.props.jwt}`
+        'Authorization': `Bearer ${localStorage.token}`
       },
       body: JSON.stringify({
         userID: this.props.id,
@@ -81,8 +81,7 @@ class EmailSignUp extends React.Component {
         scheduleParams: scheduleParams
       })
     })
-    //after email sent redirect to /scheduled_emails tab
-    //this.props.history.push("/scheduled_emails")
+    this.props.history.push("/scheduled_emails")
   }
 
   render(){
@@ -145,12 +144,10 @@ class EmailSignUp extends React.Component {
   }  
 };
 
-
 function msp(state){
   const { departmentId, dates, isHighlight, dateBegin, dateEnd } = state.searchReducer;
-  const { email, id } = state.userReducer.user
-  const { jwt } = state.userReducer
-  return { departmentId, dates, isHighlight, dateBegin, dateEnd, email, id, jwt }
+  const { email, id } = state.userReducer.user;
+  return { departmentId, dates, isHighlight, dateBegin, dateEnd, email, id }
 }
 
 export default connect(msp)(EmailSignUp);
