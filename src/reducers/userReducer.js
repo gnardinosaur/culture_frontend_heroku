@@ -7,7 +7,6 @@ const defaultState = {
     email: "",
     phone: "",
   },
-  jwt: "",
   loggedIn: false
 };
 
@@ -16,9 +15,8 @@ function userReducer(prevState = defaultState, action){
     case "SET_USER":  
       return {
         ...prevState, 
-        user: action.payload.user, 
+        user: action.payload, 
         loggedIn: true, 
-        jwt: action.payload.jwt
       }
     case "LOG_OUT":  
       return {...prevState, user: {}, loggedIn: false}

@@ -16,7 +16,7 @@ class Favorites extends React.Component {
       headers: {
         'Content-Type' : 'application/json',
         'Accept': 'application/json',
-        'Authorization': `Bearer ${this.props.jwt}`
+        'Authorization': `Bearer ${localStorage.token}`
       }
     })
     .then(resp => resp.json())
@@ -33,7 +33,7 @@ class Favorites extends React.Component {
       headers: {
         'Content-Type' : 'application/json',
         'Accept': 'application/json',
-        'Authorization': `Bearer ${this.props.jwt}`
+        'Authorization': `Bearer ${localStorage.token}`
       }
     })
     .then(this.hideCard(card))
@@ -74,8 +74,7 @@ class Favorites extends React.Component {
 
 function msp(state){
   const { id } = state.userReducer.user;
-  const { jwt } = state.userReducer
-  return { id, jwt }
+  return { id }
 }
 
 export default connect(msp)(Favorites);
