@@ -68,20 +68,19 @@ class SearchResult extends React.Component {
   }
 
   render(){
-
+  
     let favButton = this.state.favItems[this.state.counter] ? 
       <Button id="heart-btn" icon onClick={this.unfavorite} > 
         <Icon name="heart" />
       </Button> 
       : 
-      <Button id="heart-btn" icon onClick={this.favorite} >
+      <Button id="heart-btn" icon onClick={this.favorite} disabled={this.props.loggedIn ? false : true}>
         <Icon name="heart outline" />
       </Button>
 
     let content;
 
     if (this.props.threeArtObjects.length === 0) {
-      
       content = 
         <div style={{ position: "fixed", top: "30%", left: "50%"}} >
             <FadeLoader color={"#25cc4c"}/>
