@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Container, Grid, Image, Segment } from 'semantic-ui-react';
+import { Container, Grid, Image, Segment, Button } from 'semantic-ui-react';
 
 class FavoriteShow extends React.Component {
 
@@ -19,13 +19,19 @@ class FavoriteShow extends React.Component {
   }
 
   render(){
-    console.log(this.state.artObj)
     let descriptionArrString = this.state.artObj.description
     let desciptionHTML = <div dangerouslySetInnerHTML={{__html: descriptionArrString}} />
 
     return (
       <Container>
         <Grid>
+          <Grid.Row>
+            <Grid.Column width={16} textAlign="left">
+              <Button onClick={() => this.props.history.goBack()} content="Back" icon="left arrow" labelPosition="left" />
+              <hr id="fav-hr"/>
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
             <Grid.Column width={10}>
               <Image src={this.state.artObj.img_url} centered rounded />
             </Grid.Column>
@@ -38,6 +44,7 @@ class FavoriteShow extends React.Component {
                 {desciptionHTML}
               </Segment>
             </Grid.Column>
+          </Grid.Row>
         </Grid>
       </Container>
     )

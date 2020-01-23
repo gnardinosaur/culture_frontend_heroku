@@ -175,6 +175,14 @@ h5.ui.header {
   cursor: pointer;
 }
 
+.ui.icon.left.labeled.button {
+  margin-left: 5%
+}
+
+#fav-hr {
+  width: 100%
+}
+
 /* semantic-ui adjustments --> change toggle color to green  */
 .ui.fitted.toggle.checkbox input:focus:checked~label:before,
 .ui.fitted.toggle.checkbox input:focus:checked~label:before,
