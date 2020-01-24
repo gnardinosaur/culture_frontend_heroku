@@ -39,8 +39,7 @@ class Favorites extends React.Component {
     .then(this.hideCard(card))
   }
   
-  hideCard = (node) => {
-    let card = node.closest('#favorite-card')
+  hideCard = (card) => {
     card.style.display = "none"
   }
 
