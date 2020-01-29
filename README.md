@@ -1,4 +1,25 @@
-this is a thing. 
+# Culture.
 
-## YouTube Demo Video 
-https://www.youtube.com/watch?v=5vEtmaPZX44&feature=youtu.be
+An application to find and learn about works of art in The Metrolpolitan Museum's collection. 
+
+## 2(ish) Minute Demo -
+* [YouTube](https://www.youtube.com/watch?v=5vEtmaPZX44&feature=youtu.be)
+
+##  Libraries & Frameworks -  
+* React/Hooks
+* Redux 
+* React Router
+* [cheerio](https://github.com/cheeriojs/cheerio) and [axios](https://github.com/axios/axios) were used to build the scraper
+* Semantic UI React for some componente 
+
+## The Database
+* There is a Rails API database for this project, located in [this](https://github.com/gnardinosaur/culture_backend) repo. 
+
+## Additional Notes
+This was my final project for Flatiron School's Software Engineering immersive program. The main goal was to use new technologies I had not yet utilized like Redux, cheerio/axios, etc. 
+
+I originally intended for the application to send users a daily email but ran into some hurdles with cron and the Mac OS I'm running, Catalina. 
+
+It took me roughly four days to ideate, draw out the UI, and test a few libaries I wanted to use, and about a week and half to build.
+
+
