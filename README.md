@@ -3,7 +3,7 @@
 An application to find and learn about works of art in The Metrolpolitan Museum's collection. 
 
 ## 2(ish) Minute Demo -
-* [YouTube](https://www.youtube.com/watch?v=5vEtmaPZX44&feature=youtu.be)
+[YouTube](https://www.youtube.com/watch?v=5vEtmaPZX44&feature=youtu.be)
 
 ##  Libraries & Frameworks -  
 * React/Hooks
@@ -13,7 +13,7 @@ An application to find and learn about works of art in The Metrolpolitan Museum'
 * Semantic UI React 
 
 ## The Database -
-* There is a Rails API database for this project, located in [this](https://github.com/gnardinosaur/culture_backend) repo. 
+There is a Rails API database for this project, located in [this](https://github.com/gnardinosaur/culture_backend) repo. 
 
 ## Additional Notes -
 This was my final project for Flatiron School's Software Engineering immersive program. The main goal was to use new technologies I had not yet utilized like Redux, cheerio/axios, etc. 
