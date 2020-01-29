@@ -12,7 +12,7 @@ An application to find and learn about works of art in The Metrolpolitan Museum'
 * [cheerio](https://github.com/cheeriojs/cheerio) and [axios](https://github.com/axios/axios) were used to build the scraper
 * Semantic UI React 
 
-## The Database -
+## Where's The Database !?-
 There is a Rails API database for this project, located in [this](https://github.com/gnardinosaur/culture_backend) repo. 
 
 ## Additional Notes -
