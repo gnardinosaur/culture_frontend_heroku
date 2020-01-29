@@ -10,7 +10,7 @@ An application to find and learn about works of art in The Metrolpolitan Museum'
 * Redux 
 * React Router
 * [cheerio](https://github.com/cheeriojs/cheerio) and [axios](https://github.com/axios/axios) were used to build the scraper
-* Semantic UI React for some componente 
+* Semantic UI React 
 
 ## The Database
 * There is a Rails API database for this project, located in [this](https://github.com/gnardinosaur/culture_backend) repo. 
@@ -20,6 +20,6 @@ This was my final project for Flatiron School's Software Engineering immersive p
 
 I originally intended for the application to send users a daily email but ran into some hurdles with cron and the Mac OS I'm running, Catalina. 
 
-It took me roughly four days to ideate, draw out the UI, and test a few libaries I wanted to use, and about a week and half to build.
+It took me roughly four days to ideate, draw out the UI, and test a few libaries I wanted to hoped to make use of, and about a week and half to build.
 
 
