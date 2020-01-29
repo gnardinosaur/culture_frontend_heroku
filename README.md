@@ -1,6 +1,6 @@
 # Culture.
 
-An application to find and learn about works of art in The Metrolpolitan Museum's collection. 
+An application to find and learn about works of art in The Metropolitan Museum's collection. 
 
 ## 2(ish) Minute Demo -
 [YouTube](https://www.youtube.com/watch?v=5vEtmaPZX44&feature=youtu.be)
