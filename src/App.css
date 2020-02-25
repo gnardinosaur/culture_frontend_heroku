@@ -89,6 +89,10 @@ hr {
   margin-top: 5%;
 }
 
+.sad {
+  font-size: 30px;
+}
+
 .ui.left.aligned.segment h3 {
   color: slategray
 }
@@ -99,8 +103,6 @@ hr {
   width: 40px;
   height: 36px;
 }
-
-
 
 .ui.icon.button {
   background-color: rgb(106, 126, 151);
