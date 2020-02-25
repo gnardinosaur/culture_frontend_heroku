@@ -47,7 +47,13 @@ export function fetchArtObjects(deptID, dateBegin, dateEnd, isHighlight, num, cb
   let URL = `https://collectionapi.metmuseum.org/public/collection/v1/search?departmentId=${deptID}&dateBegin=${dateBegin}&dateEnd=${dateEnd}&isHighlight=${isHighlight}&q=*`
   fetch(URL)
   .then(resp => resp.json())
-  .then(data => getArtObjIDs(data.objectIDs, num, cb))
+  .then(data => {
+    if(data.total === 0) {
+      cb('no results')
+    } else {
+      getArtObjIDs(data.objectIDs, num, cb)
+    }
+  })
 }
 
 function getArtObjIDs(allObjectIDsArr, num, cb){

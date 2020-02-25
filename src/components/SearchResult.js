@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Grid, Image, Button, Icon, Segment } from 'semantic-ui-react';
+import { Grid, Image, Button, Icon, Segment, Header} from 'semantic-ui-react';
 import FadeLoader from 'react-spinners/FadeLoader';
 
 class SearchResult extends React.Component {
@@ -80,41 +80,48 @@ class SearchResult extends React.Component {
 
     let content;
 
-    if (this.props.threeArtObjects.length === 0) {
+    if(this.props.threeArtObjects.length === 0) {
       content = 
         <div style={{ position: "fixed", top: "30%", left: "50%"}} >
             <FadeLoader color={"#25cc4c"}/>
         </div>
+    } else if(this.props.threeArtObjects === 'no results') {
+      content = 
+        <Segment secondary>
+          <Header style={{ color: "red" }} size='large'>Unfortunately there are no results, please try a different set of search parameters.</Header>
+          <Header style={{ color: "red" }} size='large'>Bummer.</Header>
+          <span role="img" className="sad">😢</span>
+        </Segment>
     } else {
       let descriptionArrString = this.props.threeArtObjects[this.state.counter].description
       let desciptionHTML = <div dangerouslySetInnerHTML={{__html: descriptionArrString}} />
       content = 
         <Grid>
-            <Grid.Row>
-              <Grid.Column width={8} textAlign="left">
-                {favButton}
-              </Grid.Column>
-              <Grid.Column width={8} textAlign="right">
-                <Button onClick={this.moveArt} content="Back" icon="left arrow" labelPosition="left" disabled={this.state.counter === 0 ? true : false} />
-                <Button onClick={this.moveArt} content="Next" icon="right arrow" labelPosition="right" />
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-              <Grid.Column width={10}>
-                <Image src={this.props.threeArtObjects[this.state.counter].img} centered rounded />
-              </Grid.Column>
-              <Grid.Column width={6}>
-                <Segment style={{overflow: 'auto', maxHeight: 500 }} textAlign="left">
-                  <h2>{this.props.threeArtObjects[this.state.counter].title}</h2>
-                  <h3>{this.props.threeArtObjects[this.state.counter].date}</h3>
-                  <h4>{this.props.threeArtObjects[this.state.counter].artist ? this.props.threeArtObjects[this.state.counter].artist : this.props.threeArtObjects[this.state.counter].culture}</h4>
-                  <br />
-                  {desciptionHTML}
-                  {/* {this.props.threeArtObjects[this.state.counter].description.map(el => <p>{el}</p>)} */}
-                </Segment>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
+          <Grid.Row>
+            <Grid.Column width={8} textAlign="left">
+              {favButton}
+            </Grid.Column>
+            <Grid.Column width={8} textAlign="right">
+              <Button onClick={this.moveArt} content="Back" icon="left arrow" labelPosition="left" disabled={this.state.counter === 0 ? true : false} />
+              <Button onClick={this.moveArt} content="Next" icon="right arrow" labelPosition="right" />
+            </Grid.Column>
+          </Grid.Row>
+          <Grid.Row>
+            <Grid.Column width={10}>
+              <Image src={this.props.threeArtObjects[this.state.counter].img} centered rounded />
+            </Grid.Column>
+            <Grid.Column width={6}>
+              <Segment style={{overflow: 'auto', maxHeight: 500 }} textAlign="left">
+                <h2>{this.props.threeArtObjects[this.state.counter].title}</h2>
+                <h3>{this.props.threeArtObjects[this.state.counter].date}</h3>
+                <h4>{this.props.threeArtObjects[this.state.counter].artist ? this.props.threeArtObjects[this.state.counter].artist : this.props.threeArtObjects[this.state.counter].culture}</h4>
+                <br />
+                {desciptionHTML}
+                {/* {this.props.threeArtObjects[this.state.counter].description.map(el => <p>{el}</p>)} */}
+              </Segment>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
     }
 
     return (

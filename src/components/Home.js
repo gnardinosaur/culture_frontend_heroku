@@ -6,7 +6,7 @@ function Home(props) {
     <div className="home">
       <h1>Culture.</h1>
       <hr/>
-      <h3>Learn about 230,000+ works of art to expand your mind.</h3>
+      <h3>Access 230,000+ objects from The Met's collection to expand your mind.</h3>
       <Search changeURL={props.history.push}/>
     </div>
   )
